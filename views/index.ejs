@@ -1,0 +1,82 @@
+<main>
+    <div class="container my-5">
+        <h1 class="text-center">CRUD MYSQL</h1>
+        
+        <!-- card -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title text-center">DATA</h5>
+                <form action="/store?_method=POST" class="row g-3" method="post">
+                    <div class="col-6">
+                        <label for="" class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="nama" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Profesi</label>
+                        <input type="text" class="form-control" name="profesi" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end card -->
+
+        <!-- flash -->
+        <% if (msg.length !== 0) { %>
+            <section class="my-3">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= msg %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </section>
+        <% } %>
+
+        <% if (danger.length !== 0) { %>
+            <section class="my-3">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%= danger %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </section>
+        <% } %>
+        <!-- end flash -->
+
+        <!-- table -->
+        <section class="mt-4">
+            <h5 class="text-center">Data</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Profesi</th>
+                    <th scope="col">Aksi</th>
+                </thead>
+                <tbody>
+                    <% if (data.length) { %>
+                        <% data.forEach((d, i) => { i++ %>
+                            <tr>
+                                <th scope="row"><%= i %></th>
+                                <td><%= d.nama %></td>
+                                <td><%= d.profesi %></td>
+                                <td>
+                                    <form action="/delete-user?_method=DELETE" method="post">
+                                        <input type="hidden" value="<%= d.id_user %>" name="id">
+                                        <a href="/edit-data/<%= d.id_user %>" class="btn btn-success">Edit</a>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('data user akan dihapus, lanjutkan?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Data Kosong!!!
+                        </div>
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
+        <!-- end table -->
+    </div>
+</main>

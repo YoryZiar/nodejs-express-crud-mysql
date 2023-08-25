@@ -1,0 +1,27 @@
+<main>
+    <div class="container my-5">
+        <!-- card -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title text-center">EDIT DATA</h5>
+                <form action="/edit-user?_method=PUT" class="row g-3" method="post">
+                    <div>
+                        <input type="hidden" value="<%= user[0].id_user %>" name="id">
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Nama</label>
+                        <input type="text" class="form-control" value="<%= user[0].nama %>" name="nama" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Profesi</label>
+                        <input type="text" class="form-control" value="<%= user[0].profesi %>" name="profesi" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+</main>
